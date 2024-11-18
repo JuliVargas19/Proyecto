@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title th:text="${#strings.isEmpty(prestamo.id) ? 'Registrar Nuevo Préstamo' : 'Editar Préstamo'}"></title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #e3e3e3, #f8f9fa);
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        width: 90%;
+        max-width: 500px;
+        margin: 40px auto;
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+    label {
+        font-weight: bold;
+        margin-top: 10px;
+        display: block;
+        color: #555;
+    }
+    select, input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+    .save-button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 10px;
+        text-align: center;
+    }
+    .save-button:hover {
+        background-color: #45a049;
+    }
+    .back-button {
+        width: 100%;
+        padding: 10px;
+        background-color: #555;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .back-button:hover {
+        background-color: #333;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2 th:text="${#strings.isEmpty(prestamo.id) ? 'Registrar Nuevo Préstamo' : 'Editar Préstamo'}"></h2>
+  <form th:action="@{/prestamos/guardar}" th:object="${prestamo}" method="post">
+    <!-- Selección del libro -->
+    <label for="libro">Libro:</label>
+    <select th:field="*{libro.id}" id="libro" required>
+      <option th:each="libro : ${libros}" th:value="${libro.id}" th:text="${libro.titulo}"
+              th:selected="${libro.id == prestamo.libro?.id}"></option>
+    </select>
+
+
+    <label for="usuario">Usuario:</label>
+    <select th:field="*{usuario.id}" id="usuario" required>
+      <option th:each="usuario : ${usuarios}" th:value="${usuario.id}" th:text="${usuario.nombre}"
+              th:selected="${usuario.id == prestamo.usuario?.id}"></option>
+    </select>
+
+
+    <label for="fechaPrestamo">Fecha de Préstamo:</label>
+    <input type="date" th:field="*{fechaPrestamo}" id="fechaPrestamo" required />
+
+
+    <label for="fechaDevolucion">Fecha de Devolución:</label>
+    <input type="date" th:field="*{fechaDevolucion}" id="fechaDevolucion" required />
+
+
+    <button type="submit" class="save-button">Guardar</button>
+    <a th:href="@{/prestamos}" class="back-button">Volver a la Lista de Préstamos</a>
+  </form>
+</div>
+</body>
+</html>

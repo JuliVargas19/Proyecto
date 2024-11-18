@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title th:text="${categoria.id != null} ? 'Editar Categoría' : 'Crear Categoría'"></title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #d6c6b2, #f3ebe4);
+        background-attachment: fixed;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        width: 80%;
+        max-width: 400px;
+        margin: 50px auto;
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    h2 {
+        text-align: center;
+        color: #5a3e2b;
+    }
+    label {
+        font-weight: bold;
+        margin-top: 10px;
+        display: block;
+        color: #333;
+    }
+    input[type="text"], input[type="hidden"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+    .save-button, .back-button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        color: white;
+        cursor: pointer;
+        text-align: center;
+        margin-top: 10px;
+    }
+    .save-button {
+        background-color: #4CAF50;
+    }
+    .save-button:hover {
+        background-color: #45a049;
+    }
+    .back-button {
+        background-color: #555;
+        text-decoration: none;
+    }
+    .back-button:hover {
+        background-color: #333;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2 th:text="${categoria.id != null} ? 'Editar Categoría' : 'Crear Nueva Categoría'"></h2>
+  <form th:action="@{/categorias/guardar}" th:object="${categoria}" method="post">
+    <!-- Campo oculto para el ID, si existe -->
+    <input type="hidden" th:field="*{id}" />
+
+    <label for="nombre">Nombre de la Categoría:</label>
+    <input type="text" th:field="*{nombre}" id="nombre" required />
+
+    <button type="submit" class="save-button" th:text="${categoria.id != null} ? 'Actualizar' : 'Guardar'"></button>
+  </form>
+  <a th:href="@{/categorias}" class="back-button">Volver a Categorías</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title th:text="${libro.id != null} ? 'Editar Libro' : 'Crear Libro'"></title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #d6c6b2, #f3ebe4);
+        background-attachment: fixed;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        width: 80%;
+        max-width: 400px;
+        margin: 50px auto;
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    h2 {
+        text-align: center;
+        color: #5a3e2b;
+        margin-bottom: 20px;
+    }
+    label {
+        font-weight: bold;
+        margin-top: 10px;
+        display: block;
+        color: #333;
+    }
+    input[type="text"], select, input[type="hidden"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+    .save-button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 10px;
+        text-align: center;
+    }
+    .save-button:hover {
+        background-color: #45a049;
+    }
+    .back-button {
+        width: 100%;
+        padding: 10px;
+        background-color: #5a3e2b;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .back-button:hover {
+        background-color: #3e2b1f;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2 th:text="${libro.id != null} ? 'Editar Libro' : 'Crear Nuevo Libro'"></h2>
+  <form th:action="@{/libros/guardar}" th:object="${libro}" method="post">
+
+    <input type="hidden" th:field="*{id}" />
+
+    <label for="titulo">Título:</label>
+    <input type="text" th:field="*{titulo}" id="titulo" placeholder="Ingrese el título del libro" required />
+
+    <label for="autor">Autor:</label>
+    <input type="text" th:field="*{autor}" id="autor" placeholder="Ingrese el nombre del autor" required />
+
+    <label for="categoria">Categoría:</label>
+    <select th:field="*{categoria.id}" id="categoria" required>
+      <option th:each="categoria : ${categorias}" th:value="${categoria.id}" th:text="${categoria.nombre}"></option>
+    </select>
+
+    <button type="submit" class="save-button" th:text="${libro.id != null} ? 'Actualizar' : 'Guardar'"></button>
+  </form>
+  <a th:href="@{/libros}" class="back-button">Volver a la Lista de Libros</a>
+</div>
+</body>
+</html>

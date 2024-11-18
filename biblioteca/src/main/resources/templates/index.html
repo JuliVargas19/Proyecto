@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Página Principal</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        background: linear-gradient(135deg, #e3e3e3, #f8f9fa);
+    }
+    .header {
+        background-color: #333;
+        color: white;
+        padding: 15px 0;
+    }
+    .header h1 {
+        margin: 0;
+    }
+    .container {
+        margin-top: 50px;
+    }
+    .card {
+        display: inline-block;
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 20px;
+        margin: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 250px;
+    }
+    .card h2 {
+        margin-bottom: 15px;
+        color: #333;
+    }
+    .card button {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .card button:hover {
+        background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+<div class="header">
+  <h1>Biblioteca</h1>
+</div>
+<div class="container">
+  <div class="card">
+    <h2>Categorías</h2>
+    <p>Gestión de categorías de libros</p>
+    <button onclick="window.location.href='/categorias'">Ir a Categorías</button>
+  </div>
+  <div class="card">
+    <h2>Libros</h2>
+    <p>Gestión de libros de la biblioteca</p>
+    <button onclick="window.location.href='/libros'">Ir a Libros</button>
+  </div>
+  <div class="card">
+    <h2>Préstamos</h2>
+    <p>Gestión de préstamos de libros</p>
+    <button onclick="window.location.href='/prestamos'">Ir a Préstamos</button>
+  </div>
+  <div class="card">
+    <h2>Usuarios</h2>
+    <p>Gestión de Usuarios</p>
+    <button onclick="window.location.href='/usuarios'">Ir a Usuarios</button>
+  </div>
+</div>
+</body>
+</html>

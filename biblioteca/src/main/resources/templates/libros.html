@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Libros</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #d6c6b2, #f3ebe4);
+            background-attachment: fixed;
+            color: #333;
+        }
+        .nav-bar {
+            background-color: rgba(51, 51, 51, 0.9);
+            padding: 10px;
+        }
+        .nav-bar a {
+            color: white;
+            margin-right: 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .nav-bar a:hover {
+            color: #ddd;
+        }
+        .container {
+            margin: 20px;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #5a3e2b;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        .add-button, .edit-button, .delete-button, .back-button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .add-button {
+            background-color: #4CAF50;
+            margin-top: 10px;
+        }
+        .add-button:hover {
+            background-color: #45a049;
+        }
+        .edit-button {
+            background-color: #2196F3;
+        }
+        .edit-button:hover {
+            background-color: #0b7dda;
+        }
+        .delete-button {
+            background-color: #f44336;
+        }
+        .delete-button:hover {
+            background-color: #da190b;
+        }
+        .back-button {
+            background-color: #007bff;
+            margin-top: 10px;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="nav-bar">
+    <a href="/categorias">Categorías</a>
+    <a href="/libros">Libros</a>
+    <a href="/prestamos">Préstamos</a>
+    <a href="/usuarios">Usuarios</a>
+</div>
+
+<div class="container">
+    <h1>Lista de Libros</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Categoría</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="libro : ${libros}">
+            <td th:text="${libro.titulo}"></td>
+            <td th:text="${libro.autor}"></td>
+            <td th:text="${libro.categoria.nombre}"></td>
+            <td>
+                <a th:href="@{/libros/editar/{id}(id=${libro.id})}">
+                    <button class="edit-button">Editar</button>
+                </a>
+                <a th:href="@{/libros/eliminar/{id}(id=${libro.id})}">
+                    <button class="delete-button" onclick="return confirm('¿Estás seguro de que deseas eliminar este libro?');">Eliminar</button>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <button class="add-button" onclick="window.location.href='/libros/nuevo'">Agregar Libro</button>
+    <button class="back-button" onclick="window.location.href='/'">Volver a la página principal</button>
+</div>
+</body>
+</html>

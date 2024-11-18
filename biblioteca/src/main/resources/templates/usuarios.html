@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Usuarios</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #d6c6b2, #f3ebe4);
+        background-attachment: fixed;
+        color: #333;
+    }
+    h1 {
+        text-align: center;
+        margin-top: 20px;
+        color: #5a3e2b;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+    table, th, td {
+        border: 1px solid #ddd;
+    }
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+    .actions a {
+        margin-right: 10px;
+        text-decoration: none;
+        color: #007bff;
+    }
+    .actions a:hover {
+        text-decoration: underline;
+    }
+    .container {
+        width: 80%;
+        margin: auto;
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .add-btn {
+        background-color: #28a745;
+        color: white;
+        padding: 10px 15px;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        display: inline-block;
+    }
+    .add-btn:hover {
+        background-color: #218838;
+    }
+    /* Estilos de la barra de navegación */
+    .nav-bar {
+        background-color: rgba(51, 51, 51, 0.9);
+        padding: 10px;
+    }
+    .nav-bar a {
+        color: white;
+        margin-right: 10px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    .nav-bar a:hover {
+        text-decoration: underline;
+    }
+    .back-btn {
+        display: block;
+        background-color: #007bff;
+        color: white;
+        text-align: center;
+        padding: 10px 15px;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 20px;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .back-btn:hover {
+        background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+
+<div class="nav-bar">
+  <a href="/categorias">Categorías</a>
+  <a href="/libros">Libros</a>
+  <a href="/prestamos">Préstamos</a>
+  <a href="/usuarios">Usuarios</a>
+</div>
+
+<div class="container">
+  <h1>Usuarios</h1>
+  <a href="/usuarios/nuevo" class="add-btn">Agregar Usuario</a>
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Correo</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="usuario : ${usuarios}">
+      <td th:text="${usuario.id}"></td>
+      <td th:text="${usuario.nombre}"></td>
+      <td th:text="${usuario.correo}"></td>
+      <td class="actions">
+        <a th:href="@{/usuarios/editar/{id}(id=${usuario.id})}">Editar</a>
+        <a th:href="@{/usuarios/eliminar/{id}(id=${usuario.id})}">Eliminar</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <a href="/" class="back-btn">Volver a la página principal</a>
+</div>
+</body>
+</html>
